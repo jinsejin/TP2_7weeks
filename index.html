@@ -91,7 +91,7 @@
         <h1>영화 목록</h1>
     </div>
     <div class="add-function">
-        <button><a>추가</a></button>
+        <button id="addButton">추가</button>
     </div>
     <div class="container mt-5">
         <!-- 영화 목록 보기 -->
@@ -144,12 +144,22 @@
                 <td>${movie.year}</td>
                 <td>${movie.actor}</td>
                 <td>${movie.director}</td>
-                <td><button type="button" class="btn btn-primary" data-bs-toggle="button">${movie.edit}</button>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="button">보기</button><td>
-
+                <td><button type="button" class="btn btn-primary" data-bs-toggle="button" onclick="goToEditPage('${movie.name}')">${movie.edit}</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="button" onclick="goToViewPage('${movie.name}')">보기</button><td>
             `;
             tbody.appendChild(row);
         });
+    function goToViewPage(movieName) {
+        const encodedMovieName = encodeURIComponent(movieName);  
+        window.location.href = `view.html?movieName=${encodedMovieName}`;
+    }
+    function goToEditPage(movieName) {
+        const encodedMovieName = encodeURIComponent(movieName);
+        window.location.href = `edit.html?movieName=${encodedMovieName}`;
+    }
+    document.getElementById("addButton").addEventListener("click", function() {
+        window.location.href = "add.html";
+    });
     </script>
 </body>
 </html>
